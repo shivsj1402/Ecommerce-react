@@ -33,13 +33,12 @@ class App extends Component {
               id :snap.id,
               ...snap.data()
             }
-          },()=>{console.log(this.state)})
+          })
         })
       }
       this.setState({
         currentUser : userAuth
       })
-      console.log(userAuth)
     })
   }
 
