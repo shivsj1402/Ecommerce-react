@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link }  from 'react-router-dom';
-import { ReactComponent  as Logo}  from '../../assets/Logo.svg'
+import { connect }from 'react-redux';
+import { ReactComponent  as Logo}  from '../../assets/Logo.svg';
 import './navbar.scss';
-import {auth} from '../../firebase/firebase.utils'
+import {auth} from '../../firebase/firebase.utils';
 
 function NavBar({currentUser}) {
   return (
@@ -28,4 +29,8 @@ function NavBar({currentUser}) {
   );
 }
 
-export default NavBar;
+const mapStateToProps= state =>({
+currentUser : state.user.currentUser
+})
+
+export default connect(mapStateToProps)(NavBar);
