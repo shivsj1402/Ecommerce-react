@@ -49,7 +49,7 @@ class App extends Component {
          <NavBar />
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/shop' component={ShopPage} />
           <Route exact path='/signin' render={()=>this.props.currentUser? (<Redirect to='/' />) : (<SigninAndRegisterPage />)} />
           <Route exact path='/shop/hats' component={HatsPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
