@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Ecommerce-react/static/css/main.c4e97055.chunk.css",
+    "main.js": "/Ecommerce-react/static/js/main.6c4a2d22.chunk.js",
+    "main.js.map": "/Ecommerce-react/static/js/main.6c4a2d22.chunk.js.map",
+    "runtime-main.js": "/Ecommerce-react/static/js/runtime-main.63df2d09.js",
+    "runtime-main.js.map": "/Ecommerce-react/static/js/runtime-main.63df2d09.js.map",
+    "static/js/2.22a194ea.chunk.js": "/Ecommerce-react/static/js/2.22a194ea.chunk.js",
+    "static/js/2.22a194ea.chunk.js.map": "/Ecommerce-react/static/js/2.22a194ea.chunk.js.map",
+    "index.html": "/Ecommerce-react/index.html",
+    "precache-manifest.b3d3d0ba16453e1b3c87f76e67c3ad2e.js": "/Ecommerce-react/precache-manifest.b3d3d0ba16453e1b3c87f76e67c3ad2e.js",
+    "service-worker.js": "/Ecommerce-react/service-worker.js",
+    "static/css/main.c4e97055.chunk.css.map": "/Ecommerce-react/static/css/main.c4e97055.chunk.css.map",
+    "static/js/2.22a194ea.chunk.js.LICENSE.txt": "/Ecommerce-react/static/js/2.22a194ea.chunk.js.LICENSE.txt",
+    "static/media/Logo.ed28accb.svg": "/Ecommerce-react/static/media/Logo.ed28accb.svg",
+    "static/media/cart-icon.30f07071.svg": "/Ecommerce-react/static/media/cart-icon.30f07071.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.63df2d09.js",
+    "static/js/2.22a194ea.chunk.js",
+    "static/css/main.c4e97055.chunk.css",
+    "static/js/main.6c4a2d22.chunk.js"
+  ]
+}
