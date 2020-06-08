@@ -5,7 +5,7 @@ import './directory-menu.scss';
 import MenuItem from '../Menu-items/menu-item';
 import {selectDirectorySections} from '../../redux/directory/directory-selector'
 
-function Directory ({section}){
+function Directory({section}){
   return(
   <div className='directory-menu'>
       {section.map(
