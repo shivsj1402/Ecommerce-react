@@ -16,7 +16,7 @@ const STripeCheckoutButton=({price})=>{
         name ="CROWN CLOTHING"
         billingAddress
         shippingAddress
-        //image ='https://sendeyo.com/up/d/f3eb2117da'
+        image ='https://svgshare.com/i/CUz.svg'
         description={`Your Total is ${price}`}
         amount={priceForSTripe}
         panelLabel="Pay Now"
