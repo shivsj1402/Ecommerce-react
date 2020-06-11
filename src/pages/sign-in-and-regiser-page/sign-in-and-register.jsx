@@ -1,14 +1,14 @@
 import React from 'react';
-import './sign-in-and-register.scss';
+import {SignInAndRegisterContainer} from './sign-in-and-register.styles';
 import SignIn from '../../Components/Sign-in-form/sign-in';
 import SignUp from '../../Components/sign-up/sign-up';
 
 function SigninAndRegisterPage() {
   return (
-      <div className="sign-in-and-sign-up">
+      <SignInAndRegisterContainer>
         <SignIn />
         <SignUp />
-      </div>
+      </SignInAndRegisterContainer>
     
   );
 }
