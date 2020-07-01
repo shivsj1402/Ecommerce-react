@@ -15,6 +15,8 @@ const config = {
 
   firebase.initializeApp(config);
 
+  // firebased util for user signup
+
   export const createUserProfileDocument = async(userAuth, additionalData) =>{
       if(!userAuth) return;
         const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -35,6 +37,37 @@ const config = {
         }
     return userRef;
   }
+
+  // util that can used to add new collection and documents to the firestore
+  export const addCollectionandDocuments = async (collectionKey, objectsToAdd) =>{
+
+    const collectionRef = firestore.collection(collectionKey);
+
+    const batch = firestore.batch();
+    objectsToAdd.forEach(element => {
+        const newDocRef = collectionRef.doc();
+        batch.set(newDocRef, element);
+    });
+
+   return await batch.commit();
+}
+
+export const ConvertCollectionsSnapshotToMap= (collections)=>{
+
+    const transformedCollection = collections.docs.map(doc =>{ 
+        const {title, items} = doc.data();
+        return{
+            routeName : encodeURI(title.toLowerCase()),
+            id:doc.id,
+            title,
+            items
+        }
+    })
+    return transformedCollection.reduce((acc, collection)=>{
+        acc[collection.title.toLowerCase()]=collection;
+        return acc;
+    },{});
+}
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

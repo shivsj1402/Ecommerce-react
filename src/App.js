@@ -8,8 +8,7 @@ import NavBar from './Components/NavBar/navbar';
 import SigninAndRegisterPage from './pages/sign-in-and-regiser-page/sign-in-and-register';
 import { selectCurrentUser } from './redux/user/user-selector'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { connect }from 'react-redux'
-
+import { connect }from 'react-redux';
 import { setCurrentUser } from './redux/user/user-actions' 
 import CheckoutPage from './pages/checkout/checkout';
 
@@ -19,9 +18,12 @@ class App extends Component {
   
   componentDidMount(){
     const {setCurrentUser}= this.props;
+    //onAuthStateChanged looks changes in the user authentication from firebase authentication section
+    // this block of code creates a new user once the user on the firestore is signed up in authentication firebase
     this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth =>{
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth)
+        //onSnapshot looks for snapshot changes from firebase and sets the current user in the store using redux actions 
         userRef.onSnapshot(snap =>{
           setCurrentUser({
             id :snap.id,
