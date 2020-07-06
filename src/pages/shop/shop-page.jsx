@@ -3,15 +3,15 @@ import { Route } from 'react-router-dom'
 import CollectionsOverviewContainer from '../../Components/Collection-overview/collections-overview.container'
 import CollectionsPageContainer from '../Collection/collection.container';
 import {connect} from 'react-redux';
-import {fetchCollectionsStartAsync} from '../../redux/shop/shop-actions';
+import {fetchCollectionsStart} from '../../redux/shop/shop-actions';
 import {createStructuredSelector} from 'reselect';
 import {selectIsCollectionLoaded} from '../../redux/shop/shop-selector'
 
 
 class ShopPage extends React.Component{
     componentDidMount(){
-        const { fetchCollectionsStartAsync } = this.props; 
-        fetchCollectionsStartAsync();
+        const { fetchCollectionsStart } = this.props; 
+        fetchCollectionsStart();
     }
 
     render(){ 
@@ -30,7 +30,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch =>({
-    fetchCollectionsStartAsync: () =>dispatch(fetchCollectionsStartAsync())
+    fetchCollectionsStart: () =>dispatch(fetchCollectionsStart())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShopPage);
