@@ -9,27 +9,14 @@ import SigninAndRegisterPage from './pages/sign-in-and-regiser-page/sign-in-and-
 import { selectCurrentUser } from './redux/user/user-selector'
 import { connect }from 'react-redux';
 import CheckoutPage from './pages/checkout/checkout';
+import { checkUserSession } from './redux/user/user-actions'
 
 class App extends Component {
 
   unSubscribeFromAuth = null;
-  
   componentDidMount(){
-    //onAuthStateChanged looks changes in the user authentication from firebase authentication section
-    // this block of code creates a new user once the user on the firestore is signed up in authentication firebase
-    // this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth =>{
-    //   if(userAuth){
-    //     const userRef = await createUserProfileDocument(userAuth)
-    //     //onSnapshot looks for snapshot changes from firebase and sets the current user in the store using redux actions 
-    //     userRef.onSnapshot(snap =>{
-    //       setCurrentUser({
-    //         id :snap.id,
-    //         ...snap.data()
-    //       })
-    //       });
-    //   }
-    //   setCurrentUser(userAuth);
-    // })
+    const {checkUserSession} = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount(){
@@ -55,4 +42,8 @@ const mapStateToProps= createStructuredSelector({
   currentUser : selectCurrentUser
   })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch =>({
+  checkUserSession : () => dispatch(checkUserSession())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

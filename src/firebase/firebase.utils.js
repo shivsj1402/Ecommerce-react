@@ -78,6 +78,15 @@ export const ConvertCollectionsSnapshotToMap= (collections)=>{
       prompt:'select_account'
   })
 
+  export const getCurrentUser = ()=>{
+      return new Promise((resolve, reject)=>{
+          const unsubscribe = auth.onAuthStateChanged(userAuth=>{
+              unsubscribe();
+              resolve(userAuth);
+          },reject)
+      })
+  }
+
 //   export const signInWithGoogle = () =>{
 //       auth.signInWithPopup(googleProvider)
 //   }
