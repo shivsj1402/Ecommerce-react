@@ -4,6 +4,7 @@ const bodyparser = require('body-parser');
 const path = require('path');
 
 //require('dotenv').config();
+
 console.log(process.env.NODE_ENV)
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
