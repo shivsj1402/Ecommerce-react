@@ -3,9 +3,10 @@ const cors = require('cors');
 const bodyparser = require('body-parser');
 const path = require('path');
 
+//Uncomment this when running locally.
 //require('dotenv').config();
 
-console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
