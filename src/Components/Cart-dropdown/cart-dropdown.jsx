@@ -1,15 +1,13 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import { createStructuredSelector } from 'reselect'
+import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom'
 
 import './cart-dropdown.scss'
 import CustomButton from '../Custom-button/custom-button';
 import CartItem from '../Cart-tem/cart-item';
-import { selectCartItems } from '../../redux/cart/cart-selectors'
-import { toggleCartHidden } from '../../redux/cart/cart-actions' 
+import { CartContext } from '../../providers/cart/cart.provider'
 
-function CartDropdown ({cartItems , history, toggleCartHidden}) {
+function CartDropdown ({history}) {
+    const {cartItems, toggleHidden} = useContext(CartContext)
         return(
             <div className="cart-dropdown">
                 <div className="cart-items">
@@ -18,18 +16,10 @@ function CartDropdown ({cartItems , history, toggleCartHidden}) {
                 : (<span className="empty-message">No items in Cart</span>)
                 }
                 </div>
-                <CustomButton onClick={()=>{history.push('/checkout'); toggleCartHidden()}}>GO TO CHECKOUT</CustomButton>
+                <CustomButton onClick={()=>{history.push('/checkout'); toggleHidden()}}>GO TO CHECKOUT</CustomButton>
             </div>
            
         )
 }
 
-const mapStateToProps= createStructuredSelector({
-    cartItems : selectCartItems
-    })
-
-const mapDispatchToProps = dispatch =>({
-    toggleCartHidden : () => dispatch(toggleCartHidden())
-})
-
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CartDropdown));
+export default withRouter(CartDropdown);

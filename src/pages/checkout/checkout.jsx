@@ -1,13 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {createStructuredSelector} from 'reselect'
-
-import {selectCartItems, selectCartTotal} from '../../redux/cart/cart-selectors'
+import React, { useContext } from 'react';
 import './checkout.scss'
 import CheckoutItem from '../../Components/Checkout-item/checkout-item';
 import STripeCheckoutButton from '../../Components/Stripe-button/stripe-button';
+import { CartContext } from '../../providers/cart/cart.provider'
 
-function CheckoutPage({cartItems, total}){
+function CheckoutPage(){
+    const {cartItems, total} = useContext(CartContext);
     return(
     <div className="checkout-page">
         <div className="checkout-header">
@@ -43,9 +41,4 @@ function CheckoutPage({cartItems, total}){
     )
 }
 
-const mapStateToProps= createStructuredSelector({
-    cartItems : selectCartItems,
-    total : selectCartTotal
-    })
-
-export default connect(mapStateToProps)(CheckoutPage);
+export default CheckoutPage;

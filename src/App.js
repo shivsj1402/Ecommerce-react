@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect} from 'react-router-dom' 
-import { createStructuredSelector } from 'reselect'
 import './App.css';
 import HomePage from './pages/homepage/homepage'
 import ShopPage from './pages/shop/shop-page';
 import NavBar from './Components/NavBar/navbar';
 import SigninAndRegisterPage from './pages/sign-in-and-regiser-page/sign-in-and-register';
-import { selectCurrentUser } from './redux/user/user-selector'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { connect }from 'react-redux'
 
-import { setCurrentUser } from './redux/user/user-actions' 
 import CheckoutPage from './pages/checkout/checkout';
+import CurrentUserContext from './contexts/user/user.context'
 
 class App extends Component {
+  constructor(){
+    super();
 
+    this.state ={
+      currentUser: null
+    }
+  }
   unSubscribeFromAuth = null;
   
   componentDidMount(){
-    const {setCurrentUser}= this.props;
     this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth =>{
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth)
         userRef.onSnapshot(snap =>{
-          setCurrentUser({
+          this.setState({currentUser : {
             id :snap.id,
             ...snap.data()
-          })
+          }})
           });
       }
-      setCurrentUser(userAuth);
+      this.setState({currentUser: userAuth});
     })
   }
 
@@ -40,11 +42,13 @@ class App extends Component {
   render(){
     return (
       <div>
-         <NavBar />
+        <CurrentUserContext.Provider value={this.state.currentUser}>
+          <NavBar />
+        </CurrentUserContext.Provider>
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route exact path='/signin' render={()=>this.props.currentUser? (<Redirect to='/' />) : (<SigninAndRegisterPage />)} />
+          <Route exact path='/signin' render={()=>this.state.currentUser? (<Redirect to='/' />) : (<SigninAndRegisterPage />)} />
           <Route exact path='/checkout' component={CheckoutPage} />
         </Switch>
       </div>
@@ -52,13 +56,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps= createStructuredSelector({
-  currentUser : selectCurrentUser
-  })
-
-
-const mapDispatchToProps = dispatch =>({
-  setCurrentUser : user => dispatch(setCurrentUser(user))
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

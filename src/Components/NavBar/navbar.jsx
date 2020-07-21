@@ -1,15 +1,16 @@
-import React from 'react';
+import React,{ useContext } from 'react';
 import { Link }  from 'react-router-dom';
-import { connect }from 'react-redux';
 import { ReactComponent  as Logo}  from '../../assets/Logo.svg';
-import { createStructuredSelector } from 'reselect';
+
 import './navbar.scss';
 import {auth} from '../../firebase/firebase.utils';
 import CartIcon from '../Cart-icon/cart-icon';
 import CartDropdown from '../Cart-dropdown/cart-dropdown';
-import { selectCurrentUser } from '../../redux/user/user-selector'
-import { selectHiddenValue } from '../../redux/cart/cart-selectors'
-function NavBar({currentUser, hidden}) {
+import CurrentUserContext from '../../contexts/user/user.context'
+import { CartContext } from '../../providers/cart/cart.provider'
+function NavBar() {
+  const currentUser = useContext(CurrentUserContext)
+  const {hidden} = useContext(CartContext)
   return (
       <div className="header">
           <Link className="logo-container" to ="/">
@@ -23,7 +24,7 @@ function NavBar({currentUser, hidden}) {
               <div className="option" onClick={()=>{auth.signOut()}}>SIGN-OUT</div>
               :<Link className="option" to="/signin">SIGN-IN</Link>
             }
-          <CartIcon />
+            <CartIcon />
           </div>
           {hidden?null :<CartDropdown />}
       </div>
@@ -31,9 +32,4 @@ function NavBar({currentUser, hidden}) {
   );
 }
 
-const mapStateToProps= createStructuredSelector({
-currentUser : selectCurrentUser,
-hidden : selectHiddenValue
-})
-
-export default connect(mapStateToProps)(NavBar);
+export default NavBar;
