@@ -5,10 +5,9 @@ import { ReactComponent  as Logo}  from '../../assets/Logo.svg';
 import { createStructuredSelector } from 'reselect';
 import './navbar.scss';
 import {auth} from '../../firebase/firebase.utils';
-import CartIcon from '../Cart-icon/cart-icon';
-import CartDropdown from '../Cart-dropdown/cart-dropdown';
+import {default as CartIcon} from '../Cart-icon/cart-icon.container';
+import { default as CartDropdown} from '../Cart-dropdown/cart-dropdown.container';
 import { selectCurrentUser } from '../../redux/user/user-selector'
-import { selectHiddenValue } from '../../redux/cart/cart-selectors'
 function NavBar({currentUser, hidden}) {
   return (
       <div className="header">
@@ -33,7 +32,6 @@ function NavBar({currentUser, hidden}) {
 
 const mapStateToProps= createStructuredSelector({
 currentUser : selectCurrentUser,
-hidden : selectHiddenValue
 })
 
 export default connect(mapStateToProps)(NavBar);

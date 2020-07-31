@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import './App.css';
 import HomePage from './pages/homepage/homepage'
 import ShopPage from './pages/shop/shop-page';
-import NavBar from './Components/NavBar/navbar';
+import {default as NavBar} from './Components/NavBar/navbar.container';
 import SigninAndRegisterPage from './pages/sign-in-and-regiser-page/sign-in-and-register';
 import { selectCurrentUser } from './redux/user/user-selector'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
