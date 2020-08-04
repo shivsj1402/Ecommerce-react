@@ -2,6 +2,7 @@ const express =require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const path = require('path');
+const compression = require('compression');
 
 //Uncomment this when running locally.
 //require('dotenv').config();
@@ -14,6 +15,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
+app.use(compression());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true}));
 
